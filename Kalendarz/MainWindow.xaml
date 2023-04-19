@@ -20,7 +20,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
@@ -29,10 +29,13 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Name="yearLabel" Content="2001" FontSize="30" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-        <Label Name="monthLabel" Content="january" FontSize="25" Grid.Row="0" Grid.Column="2"  />
 
-        <Button x:Name="add_event" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Content="Dodaj wydarzenie" Click="Open_New_Event"/>
+ 
+<!-- ADD EVENT BT -->
+
+        <Button x:Name="add_event" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Content="Dodaj wydarzenie" Click="Open_New_Event"/>
+
+<!-- DAYS OF WEEK -->
 
         <Label x:Name="pn" Content="Poniedziałek" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
         <Label x:Name="wt" Content="Wtorek" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />

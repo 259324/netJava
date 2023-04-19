@@ -1,21 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 
 namespace Kalendarz
 {
@@ -26,16 +14,20 @@ namespace Kalendarz
     {
         //Lista komorek (poszczegolnych dni wyswietlanych w miesiacu)
         public List<Komorka> komorki = new List<Komorka>();
-
-
+        private readonly Date date;
 
 
         public MainWindow()
         {
             InitializeComponent();
 
+            date = new Date(this);
+
+            LoadDate();
 
             LoadCells();
+
+            ReloadCells();
 
             LoadEvents();
 
@@ -72,6 +64,15 @@ namespace Kalendarz
 
         }
 
+        public void LoadDate()
+        {
+            Frame f = new Frame { Content = date };
+            PanelKomorek.Children.Add(f);
+            Grid.SetRow(f, 0);
+            Grid.SetColumn(f, 0);
+            Grid.SetColumnSpan(f, 7);
+        }
+
         public void LoadEvents()
         {
             IList<Event> ListEvents;
@@ -90,7 +91,7 @@ namespace Kalendarz
         { //Zlicza ilosc komorek i je numeruje
             int count = 0;
             //Iteracja po wierszach siatce (Grid), którą nazwałem PanelKomorek
-            for (int row = 3; row < 8; row++)
+            for (int row = 2; row < 8; row++)
             {
                 // po kolumnach
                 for (int col = 0; col < 7; col++)
@@ -98,11 +99,7 @@ namespace Kalendarz
                     // Tworze nowa komorke do wstawienia z parametrem int, który wyswietli w rogu komorki
                     Komorka komorka = new Komorka(count);
                     //Tworzy frame ktorej content ustawiam na stworzona komorke (nw dlaczego ale tak trzeba)
-                    Frame f = new Frame
-                    {
-                        Content = komorka
-                    };
-
+                    Frame f = new Frame { Content = komorka };
                     //dodaje nowo powstala komorke do listy zeby zachowac wskaznik do niej
                     komorki.Add(komorka);
 
@@ -118,6 +115,33 @@ namespace Kalendarz
             }
 
         }
+
+        public void ReloadCells()
+        {
+            int cellID = 0;
+            //int dayNum= DateTime.DaysInMonth(date.ViewedDate.Year, (date.ViewedDate-DateTime.Mon).Month) - date.FirstDayOfTheMonth() + 1;
+            //Wypełnienie komórek poprzednim miesiącem
+            //while(dayNum)
+
+            //for (int i= DateTime.DaysInMonth(date.ViewedDate.Year, date.ViewedDate.Month)-date.FirstDayOfTheMonth();)
+            int dayCount = 1;
+            for (int i = 0; i < komorki.Count; i++)
+            {
+                if (i < date.FirstDayOfTheMonth() - 1 || dayCount > DateTime.DaysInMonth(date.ViewedDate.Year, date.ViewedDate.Month))
+                {
+                    if (i > 15)
+                    {
+                        komorki[i].SetLight(dayCount);
+                    }
+                }
+                else
+                {
+                    komorki[i].SetDark(dayCount);
+                    dayCount++;
+                }
+            }
+        }
+
         public void Open_New_Event(object sender, RoutedEventArgs e)
         {
             NewEventWindow newev = new NewEventWindow();
@@ -125,7 +149,7 @@ namespace Kalendarz
             Show11();
 
         }
-        
+
         public void Show11()
         {
             IList<Event> ListEvents1;
@@ -134,37 +158,12 @@ namespace Kalendarz
                 ListEvents1 = db.Events.ToList();
             }
             int SizeOfList = ListEvents1.Count;
-            for(int i = 0; i < SizeOfList; i++)
+            for (int i = 0; i < SizeOfList; i++)
             {
                 Console.WriteLine(ListEvents1[i].EventName);
                 komorki[i].AddEvent(ListEvents1[i].EventName);
             }
         }
-        
+
     }
 }
-
-
-//new_event newev = new new_event();
-/*
-Frame ffr = new Frame
-{
-    Content = newev
-};
-PanelKomorek.Children.Add(ffr);
-Grid.SetRow(ffr, 1);
-// i kolumnie
-Grid.SetColumn(ffr, 1);
-
-using (var db = new AddToCalendarContext())
-            {
-                var query = db.Events
-                              .Where(s =>  s.EventName == "Urodziny")
-                              .FirstOrDefault<AddToCalendar>();
-                komorki[5].AddEvent(query.EventDescription);
-            }
-*/
-//dodanie w komorce szostej w liscie wydarzenia
-//komorki[5].AddEvent("przeglad techniczny gruza");
-//komorki[20].AddEvent("wywiadowka bachora");
-//komorki[21].AddEvent("lanie bachora");

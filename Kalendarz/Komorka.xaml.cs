@@ -21,23 +21,35 @@ namespace Kalendarz
     public partial class Komorka : Page
     {
         private List<string> events = new List<string>();
-        private int day;
+
+        private SolidColorBrush  dark = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF240B27"));
+         
         public Komorka(int day)
         {
             InitializeComponent();
-            this.day = day;
             dayLabel.Content = day.ToString();
         }
-        public void AddEvent(string name)
+
+        public void SetDark(int day)
         {
-            Label label = new Label();
-            label.Content = name;
-            eventsPanel.Children.Add(label);
-        }
-        public void clear(){
-            events.Clear();
+            dayLabel.Content = day.ToString();
+            Values.Background = dark;
+            dayLabel.Foreground = Brushes.White;
+
         }
 
+        public void SetLight(int day)
+        {
+            dayLabel.Content = day.ToString();
+            Values.Background = Brushes.White;
+            dayLabel.Foreground = Brushes.Gray;
+        }
+
+        public void AddEvent(string name)
+        {
+            Label label = new Label{Content = name};
+            eventsPanel.Children.Add(label);
+        }
     }
 
 }
