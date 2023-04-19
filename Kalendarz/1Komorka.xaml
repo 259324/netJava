@@ -1,0 +1,7 @@
+<local:MojaKlasa xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:local="clr-namespace:Kalendarz">
+    <Grid>
+        <TextBlock Text="Przyk³adowy tekst" />
+    </Grid>
+</local:MojaKlasa>

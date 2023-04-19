@@ -1,0 +1,40 @@
+﻿<Window x:Class="Kalendarz.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kalendarz"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="PanelKomorek">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="pn" Content="Poniedziałek" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
+        <Label x:Name="wt" Content="Wtorek" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
+        <Label x:Name="sr" Content="Środa" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
+        <Label x:Name="czw" Content="Czwartek" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"/>
+        <Label x:Name="pt" Content="Piątek" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
+        <Label x:Name="sb" Content="Sobota" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center"/>
+        <Label x:Name="nd" Content="Niedziela" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center"/>
+
+        
+  
+    </Grid>
+</Window>
