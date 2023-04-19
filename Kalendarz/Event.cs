@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Kalendarz
 {
   
-    public class AddToCalendar
+    public class Event
     {
         public int ID { get; set; }
         public string EventName { get; set; }

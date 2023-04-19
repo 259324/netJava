@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
@@ -23,43 +24,21 @@ namespace Kalendarz
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Lista komorek (poszczegolnych dni wyswietlanych w miesiacu)
         public List<Komorka> komorki = new List<Komorka>();
+
+
+
+
         public MainWindow()
         {
             InitializeComponent();
 
-        //Lista komorek (poszczegolnych dni wyswietlanych w miesiacu)
-        
 
-        //Zlicza ilosc komorek i je numeruje
-        int count = 0;
-            //Iteracja po wierszach siatce (Grid), którą nazwałem PanelKomorek
-            for(int row = 2; row < 7; row++)
-            {
-                // po kolumnach
-                for(int col = 0; col < 7; col++)
-                {
-                    // Tworze nowa komorke do wstawienia z parametrem int, który wyswietli w rogu komorki
-                    Komorka komorka = new Komorka(count);
-                    //Tworzy frame ktorej content ustawiam na stworzona komorke (nw dlaczego ale tak trzeba)
-                    Frame f = new Frame
-                    {
-                        Content = komorka
-                    };
+            LoadCells();
 
-                    //dodaje nowo powstala komorke do listy zeby zachowac wskaznik do niej
-                    komorki.Add(komorka);
+            LoadEvents();
 
-                    //Dodanie elementu do siatki (tego Frame-a)
-                    PanelKomorek.Children.Add(f);
-                    //ustawienie w ktorym wierszu ma byc
-                    Grid.SetRow(f, row);
-                    // i kolumnie
-                    Grid.SetColumn(f, col);
-                    count++;
-
-                }
-            }
             /*
             void NewAddtoCalendar(AddToCalendar addToCalendar)
             {
@@ -86,20 +65,62 @@ namespace Kalendarz
                  EventName = "Zakupy",
                  EventDescription = "Kup marchewke"
              };
+
+
+            komorki[5].AddEvent(ListEvents[1].EventName);
              */
-            IList<AddToCalendar> ListEvents;
-            using (var db = new AddToCalendarContext())
+
+        }
+
+        public void LoadEvents()
+        {
+            IList<Event> ListEvents;
+            using (var db = new EventContext())
             {
                 ListEvents = db.Events.ToList();
             }
 
-            komorki[5].AddEvent(ListEvents[1].EventName);
+            for (int i = 0; i < ListEvents.Count; i++)
+            {
+                komorki[i].AddEvent(ListEvents[i].EventName);
+            }
         }
 
+        public void LoadCells()
+        { //Zlicza ilosc komorek i je numeruje
+            int count = 0;
+            //Iteracja po wierszach siatce (Grid), którą nazwałem PanelKomorek
+            for (int row = 3; row < 8; row++)
+            {
+                // po kolumnach
+                for (int col = 0; col < 7; col++)
+                {
+                    // Tworze nowa komorke do wstawienia z parametrem int, który wyswietli w rogu komorki
+                    Komorka komorka = new Komorka(count);
+                    //Tworzy frame ktorej content ustawiam na stworzona komorke (nw dlaczego ale tak trzeba)
+                    Frame f = new Frame
+                    {
+                        Content = komorka
+                    };
 
+                    //dodaje nowo powstala komorke do listy zeby zachowac wskaznik do niej
+                    komorki.Add(komorka);
+
+                    //Dodanie elementu do siatki (tego Frame-a)
+                    PanelKomorek.Children.Add(f);
+                    //ustawienie w ktorym wierszu ma byc
+                    Grid.SetRow(f, row);
+                    // i kolumnie
+                    Grid.SetColumn(f, col);
+                    count++;
+
+                }
+            }
+
+        }
         public void Open_New_Event(object sender, RoutedEventArgs e)
         {
-            new_event newev = new new_event();
+            NewEventWindow newev = new NewEventWindow();
             newev.Show();
             Show11();
 
@@ -107,8 +128,8 @@ namespace Kalendarz
         
         public void Show11()
         {
-            IList<AddToCalendar> ListEvents1;
-            using (var db = new AddToCalendarContext())
+            IList<Event> ListEvents1;
+            using (var db = new EventContext())
             {
                 ListEvents1 = db.Events.ToList();
             }

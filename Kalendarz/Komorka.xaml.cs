@@ -32,10 +32,12 @@ namespace Kalendarz
         {
             Label label = new Label();
             label.Content = name;
-
             eventsPanel.Children.Add(label);
-
         }
+        public void clear(){
+            events.Clear();
+        }
+
     }
 
 }

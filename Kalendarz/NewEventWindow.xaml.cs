@@ -19,17 +19,17 @@ namespace Kalendarz
     /// <summary>
     /// Logika interakcji dla klasy new_event.xaml
     /// </summary>
-    public partial class new_event : Window
+    public partial class NewEventWindow : Window
     {
-        public new_event()
+        public NewEventWindow()
         {
             InitializeComponent();
         }
 
         private void Dodaj_BT_Click(object sender, RoutedEventArgs e)
         {
-            var context = new AddToCalendarContext();
-            var temp = new AddToCalendar
+            var context = new EventContext();
+            var temp = new Event
             {
                 //ID = 1,
                 EventName = nazwa_TB.Text,

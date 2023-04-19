@@ -5,17 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kalendarz"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Kalendarz" Height="450" Width="800">
+
 
     <Grid x:Name="PanelKomorek">
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,17 +27,21 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="add_event" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="Dodaj wydarzenie" Click="Open_New_Event"/>
+        <Label Name="yearLabel" Content="2001" FontSize="30" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <Label Name="monthLabel" Content="january" FontSize="25" Grid.Row="0" Grid.Column="2"  />
+
+        <Button x:Name="add_event" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Content="Dodaj wydarzenie" Click="Open_New_Event"/>
+
         <Label x:Name="pn" Content="Poniedziałek" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
-        <Label x:Name="wt" Content="Wtorek" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
-        <Label x:Name="sr" Content="Środa" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
-        <Label x:Name="czw" Content="Czwartek" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center"/>
-        <Label x:Name="pt" Content="Piątek" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
-        <Label x:Name="sb" Content="Sobota" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center"/>
-        <Label x:Name="nd" Content="Niedziela" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center"/>
-        
+        <Label x:Name="wt" Content="Wtorek" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
+        <Label x:Name="sr" Content="Środa" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" />
+        <Label x:Name="czw" Content="Czwartek" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" />
+        <Label x:Name="pt" Content="Piątek" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" />
+        <Label x:Name="sb" Content="Sobota" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center" />
+        <Label x:Name="nd" Content="Niedziela" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center" />
+
 
 
 

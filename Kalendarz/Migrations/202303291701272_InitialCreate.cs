@@ -8,7 +8,7 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.AddToCalendars",
+                "dbo.Events",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -22,7 +22,7 @@
         
         public override void Down()
         {
-            DropTable("dbo.AddToCalendars");
+            DropTable("dbo.Events");
         }
     }
 }
