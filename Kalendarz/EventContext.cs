@@ -37,8 +37,8 @@ namespace Kalendarz
 
             var MainEvents = new List<Event>
                 {
-                new Event() {ID = 1, EventName = "Urodziny", EventDescription = "Urodziny Asi"},
-                new Event() {ID = 2, EventName = "Zakupy", EventDescription = "Kup Marchewkę"}
+                new Event() {ID = 1, EventName = "Urodziny", EventDescription = "Urodziny Asi", Date = DateTime.Now},
+                new Event() {ID = 2, EventName = "Zakupy", EventDescription = "Kup Marchewkę", Date = DateTime.Now}
                 };
             MainEvents.ForEach(c  => context.Events.Add(c));
             context.SaveChanges();

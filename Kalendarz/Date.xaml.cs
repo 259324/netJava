@@ -24,7 +24,7 @@ namespace Kalendarz
         public DateTime ViewedDate { get; set; }
         private readonly MainWindow Main;
         readonly string[] months = { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień" };
-
+        public int TotalDays;
         public Date(MainWindow main)
         {
             InitializeComponent();
@@ -32,6 +32,7 @@ namespace Kalendarz
             yearLabel.Content = ViewedDate.Year;
             monthLabel.Content = months[ViewedDate.Month - 1];
             Main = main;
+            TotalDays = DateTime.DaysInMonth(ViewedDate.Year, ViewedDate.Month);
         }
         public void PrevYear(object sender, RoutedEventArgs e)
         {
@@ -62,6 +63,7 @@ namespace Kalendarz
         {
             yearLabel.Content = ViewedDate.Year;
             monthLabel.Content = months[ViewedDate.Month - 1];
+            TotalDays = DateTime.DaysInMonth(ViewedDate.Year, ViewedDate.Month);
             Main.ReloadCells();
         }
 
@@ -69,6 +71,7 @@ namespace Kalendarz
         {
             DateTime tmp = ViewedDate;
             tmp = tmp.AddDays(-(tmp.Day-1));
+            // 1 - pon, 7 - nd
             return ((int)tmp.DayOfWeek);
         }
 

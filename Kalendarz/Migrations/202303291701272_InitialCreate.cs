@@ -14,6 +14,7 @@
                         ID = c.Int(nullable: false, identity: true),
                         EventName = c.String(),
                         EventDescription = c.String(),
+                        Dae = c.DateTime(),
                         Data = c.String(),
                     })
                 .PrimaryKey(t => t.ID);

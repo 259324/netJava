@@ -82,9 +82,7 @@ namespace Kalendarz
             }
 
             for (int i = 0; i < ListEvents.Count; i++)
-            {
                 komorki[i].AddEvent(ListEvents[i].EventName);
-            }
         }
 
         public void LoadCells()
@@ -110,36 +108,31 @@ namespace Kalendarz
                     // i kolumnie
                     Grid.SetColumn(f, col);
                     count++;
-
                 }
             }
-
         }
 
         public void ReloadCells()
         {
-            int cellID = 0;
-            //int dayNum= DateTime.DaysInMonth(date.ViewedDate.Year, (date.ViewedDate-DateTime.Mon).Month) - date.FirstDayOfTheMonth() + 1;
-            //Wypełnienie komórek poprzednim miesiącem
-            //while(dayNum)
+            DateTime PrevMonth = date.ViewedDate.AddMonths(-1);
 
-            //for (int i= DateTime.DaysInMonth(date.ViewedDate.Year, date.ViewedDate.Month)-date.FirstDayOfTheMonth();)
-            int dayCount = 1;
-            for (int i = 0; i < komorki.Count; i++)
-            {
-                if (i < date.FirstDayOfTheMonth() - 1 || dayCount > DateTime.DaysInMonth(date.ViewedDate.Year, date.ViewedDate.Month))
-                {
-                    if (i > 15)
-                    {
-                        komorki[i].SetLight(dayCount);
-                    }
-                }
-                else
-                {
-                    komorki[i].SetDark(dayCount);
-                    dayCount++;
-                }
-            }
+            int PrevDaysInMonth = DateTime.DaysInMonth(PrevMonth.Year, PrevMonth.Month);
+
+            int cellCount = 0;
+            int PrevDayCount, CurrDayCount = 1, NextDayCount=1;
+
+            //Dodanie dni poprzedniego miesiąca
+            PrevDayCount = PrevDaysInMonth - date.FirstDayOfTheMonth() +2;
+            while (PrevDayCount< PrevDaysInMonth+1)
+                komorki[cellCount++].SetLight(PrevDayCount++);
+
+            //Dodanie dni aktualnego miesiąca
+            while(CurrDayCount<=date.TotalDays)
+                komorki[cellCount++].SetDark(CurrDayCount++);
+
+            //Dodanie dni następnego miesiąca
+            while (cellCount < 42)
+                komorki[cellCount++].SetLight(NextDayCount++);
         }
 
         public void Open_New_Event(object sender, RoutedEventArgs e)
