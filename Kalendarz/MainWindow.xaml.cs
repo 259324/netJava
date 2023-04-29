@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,7 +18,7 @@ namespace Kalendarz
         public List<Komorka> komorki = new List<Komorka>();
         private readonly Date date;
 
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +32,10 @@ namespace Kalendarz
             ReloadCells();
 
             LoadEvents();
+
+            LoadWeatherData();
+
+            
 
             /*
             void NewAddtoCalendar(AddToCalendar addToCalendar)
@@ -111,6 +117,15 @@ namespace Kalendarz
                 }
             }
         }
+     
+        public async Task LoadWeatherData() 
+        {
+            var weatherDataWro = await WeatherDataSource.GetWeatherDataAsync("wroclaw");
+            WeatherLabelWro.Content = String.Format("pogoda: {0} {1} C", weatherDataWro.Stacja, weatherDataWro.Temperatura);
+            var weatherDataWwa = await WeatherDataSource.GetWeatherDataAsync("warszawa");
+            WeatherLabelWwa.Content = String.Format("pogoda: {0} {1} C", weatherDataWwa.Stacja, weatherDataWwa.Temperatura);
+        }
+
 
         public void ReloadCells()
         {

@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class baza1 : DbMigration
     {
         public override void Up()
         {
@@ -14,7 +14,7 @@
                         ID = c.Int(nullable: false, identity: true),
                         EventName = c.String(),
                         EventDescription = c.String(),
-                        Dae = c.DateTime(),
+                        Date = c.DateTime(nullable: false),
                         Data = c.String(),
                     })
                 .PrimaryKey(t => t.ID);

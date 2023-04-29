@@ -28,14 +28,17 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
  
 <!-- ADD EVENT BT -->
 
-        <Button x:Name="add_event" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Content="Dodaj wydarzenie" Click="Open_New_Event"/>
+        <Button x:Name="add_event" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Content="Dodaj wydarzenie" Click="Open_New_Event"/>
+        <Label x:Name="WeatherLabelWro" Content="Pogoda" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label x:Name="WeatherLabelWwa" Content="Pogoda" Grid.Row="8" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
 
-<!-- DAYS OF WEEK -->
+        <!-- DAYS OF WEEK -->
 
         <Label x:Name="pn" Content="Poniedziałek" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
         <Label x:Name="wt" Content="Wtorek" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
