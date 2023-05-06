@@ -9,6 +9,9 @@ using System.Data.Entity.Migrations;
 
 namespace Kalendarz
 {
+    /// <summary>
+    /// Context which connects database with application
+    /// </summary>
     public class EventContext : DbContext
     {
         public EventContext()
@@ -19,7 +22,10 @@ namespace Kalendarz
         }
 
         public DbSet<Event> Events { get; set; }
-
+        /// <summary>
+        /// Function adds new event to database
+        /// </summary>
+        /// <param name="event_">event name</param>
         public void NewAddToCalendar(Event event_)
         {
             using (var context = new EventContext())
@@ -29,7 +35,9 @@ namespace Kalendarz
             }
         }
     }
-
+    /// <summary>
+    /// Class adds two events to database to fill up calendar 
+    /// </summary>
     public class CalendarDbInitializer : DropCreateDatabaseAlways<EventContext>
     {
         protected override void Seed(EventContext context)

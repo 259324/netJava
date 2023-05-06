@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Kalendarz
 {
+    /// <summary>
+    /// Class that contains parameters of weather, with constructor
+    /// </summary>
     public class WeatherData
     {
         public static WeatherData FromJson(Dictionary<string, string> json) { return new WeatherData(json["id_stacji"], json["stacja"], json["data_pomiaru"], json["godzina_pomiaru"], json["temperatura"], json["predkosc_wiatru"], json["kierunek_wiatru"], json["wilgotnosc_wzgledna"], json["suma_opadu"], json["cisnienie"]); }
@@ -36,12 +39,19 @@ namespace Kalendarz
         public string Cisnienie { get; set; }
     }
 
-
+    /// <summary>
+    /// Class which is use to connect by api and return weather data
+    /// </summary>
     internal class WeatherDataSource
     {
         private static readonly HttpClient client = new HttpClient();
         private const string url = "https://danepubliczne.imgw.pl/api/data/synop/station/";
 
+        /// <summary>
+        /// Asynchronic function which connect by API with website and return info about weather
+        /// </summary>
+        /// <param name="city">The name of the city to which the temperature is returned</param>
+        /// <returns>Class WeatherData</returns>
         public static async Task<WeatherData> GetWeatherDataAsync(string city)
         {   
             

@@ -5,7 +5,10 @@ using System.Collections.Generic;
 
 namespace Kalendarz
 {
-  
+
+    /// <summary>
+    /// Class which contains parameters to database. Database is based on Entity Framework.
+    /// </summary>
     public class Event
     {
         public int ID { get; set; }

@@ -18,6 +18,7 @@ namespace Kalendarz
 {
     /// <summary>
     /// Interaction logic for Date.xaml
+    /// Class visualizes and separates proper formula of calendar
     /// </summary>
     public partial class Date : Page
     {
@@ -34,31 +35,45 @@ namespace Kalendarz
             Main = main;
             TotalDays = DateTime.DaysInMonth(ViewedDate.Year, ViewedDate.Month);
         }
+        /// <summary>
+        /// Function changes the year to the previous one
+        /// </summary>
         public void PrevYear(object sender, RoutedEventArgs e)
         {
             ViewedDate = ViewedDate.AddMonths(-12);
             Reload();
-            
+
 
         }
+        /// <summary>
+        /// Function changes the year to the next one
+        /// </summary>
         public void NextYear(object sender, RoutedEventArgs e)
         {
             ViewedDate = ViewedDate.AddMonths(12);
             Reload();
 
         }
+        /// <summary>
+        /// Function changes the month to the previous one
+        /// </summary>
         public void PrevMonth(object sender, RoutedEventArgs e)
         {
             ViewedDate = ViewedDate.AddMonths(-1);
             Reload();
 
         }
+        /// <summary>
+        /// Function changes the month to the next one
+        /// </summary>
         public void NextMonth(object sender, RoutedEventArgs e)
         {
             ViewedDate = ViewedDate.AddMonths(1);
             Reload();
         }
-
+        /// <summary>
+        /// Function reloads view of calendar
+        /// </summary>
         public void Reload()
         {
             yearLabel.Content = ViewedDate.Year;
@@ -66,7 +81,10 @@ namespace Kalendarz
             TotalDays = DateTime.DaysInMonth(ViewedDate.Year, ViewedDate.Month);
             Main.ReloadCells();
         }
-
+        /// <summary>
+        /// Function calculate first day of the month
+        /// </summary>
+        /// <returns>day of the week</returns>
         public int FirstDayOfTheMonth()
         {
             DateTime tmp = ViewedDate;

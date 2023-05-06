@@ -17,6 +17,7 @@ namespace Kalendarz
 {
     /// <summary>
     /// Interaction logic for Komorka.xaml
+    /// Class presents cell of the day 
     /// </summary>
     public partial class Komorka : Page
     {
@@ -29,22 +30,30 @@ namespace Kalendarz
             InitializeComponent();
             dayLabel.Content = day.ToString();
         }
-
+        /// <summary>
+        /// Changes colour of cell to dark
+        /// </summary>
+        /// <param name="day">Number of day</param>
         public void SetDark(int day)
         {
             dayLabel.Content = day.ToString();
             Values.Background = dark;
             dayLabel.Foreground = Brushes.White;
-
         }
-
+        /// <summary>
+        /// Changes colour of cell to white
+        /// </summary>
+        /// <param name="day">Number of day</param>
         public void SetLight(int day)
         {
             dayLabel.Content = day.ToString();
             Values.Background = Brushes.White;
             dayLabel.Foreground = Brushes.Gray;
         }
-
+        /// <summary>
+        /// Adds new event to cell
+        /// </summary>
+        /// <param name="name">name of the event</param>
         public void AddEvent(string name)
         {
             Label label = new Label{Content = name};
