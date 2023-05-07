@@ -25,27 +25,38 @@ namespace Kalendarz
         public NewEventWindow()
         {
             InitializeComponent();
+            date_picker.SelectedDate = DateTime.Now;
         }
 
         private void AddEvent(object sender, RoutedEventArgs e)
         {
-
-            using (var context = new EventContext())
+            if(date_picker.SelectedDate==null)
             {
-                var temp = new Event
-                {
-                    ID = context.Events.Count() + 1,
-                    //ID = 3,
-                    EventName = nazwa_TB.Text,
-                    EventDescription = opis_TB.Text,
-                    Date = (DateTime)date_picker.SelectedDate
-                };
-
-                context.Events.Add(temp);
-                context.SaveChanges();
-
+                label.Content = "Wybierz datę!";
             }
-            this.Close();
+            if(nazwa_TB.Text=="")
+            {
+                label.Content = "Wprowadź nazwę!";
+            }
+            else
+            {
+                using (var context = new EventContext())
+                {
+                    var temp = new Event
+                    {
+                        ID = context.Events.Count() + 1,
+                        EventName = nazwa_TB.Text,
+                        EventDescription = opis_TB.Text,
+                        Date = (DateTime)date_picker.SelectedDate
+                    };
+
+                    context.Events.Add(temp);
+                    context.SaveChanges();
+
+                }
+                this.Close();
+            }
+
         }
     }
 }

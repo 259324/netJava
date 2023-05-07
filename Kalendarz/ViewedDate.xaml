@@ -21,7 +21,7 @@
             <RowDefinition Height="50"/>
          </Grid.RowDefinitions>
         <!-- YEAR -->
-        <Label x:Name="yearLabel" FontSize="30" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Center" />
+        <Label x:Name="yearLabel" FontSize="30" Grid.Row="0" Grid.Column="1" Foreground="#FF240B27"  HorizontalAlignment="Center" />
 
         <Button x:Name="prevYear" Click="PrevYear" HorizontalAlignment="Right"  Grid.Column="0" Grid.Row="0" Height="35" Width="15"  BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
             <Image Source="/Kalendarz;component/leftArrow.png" Stretch="Fill"  />
@@ -33,7 +33,7 @@
 
         <!-- MONTH -->
 
-        <Label x:Name="monthLabel" FontSize="25" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
+        <Label x:Name="monthLabel" FontSize="25" Grid.Row="0" Grid.Column="4" Foreground="#FF240B27" HorizontalAlignment="Center"/>
 
         <Button x:Name="prevMonth" Click="PrevMonth" HorizontalAlignment="Right"  Grid.Column="3" Grid.Row="0" Height="35" Width="15"  BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
             <Image Source="/Kalendarz;component/leftArrow.png" Stretch="Fill"  />

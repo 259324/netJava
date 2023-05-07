@@ -35,7 +35,7 @@ namespace Kalendarz
 
             LoadEvents();
 
-            //_ = LoadWeatherData();
+            _ = LoadWeatherData();
 
         }
 
@@ -60,7 +60,6 @@ namespace Kalendarz
             using (var context = new EventContext())
             {
                 ListEvents = context.Events.ToList();
-                debug.Content = context.Events.Count().ToString();
             }
 
             foreach (var k in ListEvents)
@@ -144,6 +143,7 @@ namespace Kalendarz
         {
             ViewEvents mViewEvents = new ViewEvents();
             mViewEvents.ShowDialog();
+            LoadEvents();
         }
     }
 }

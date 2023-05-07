@@ -59,7 +59,7 @@ namespace Kalendarz
         /// <param name="name">name of the event</param>
         public void AddEvent(Event ev)
         {
-            Label label = new Label{Content = ev.EventName};
+            Label label = new Label{Content = ev.EventName, Height = Double.NaN};
             if(isDark)
             {
                 label.Foreground = Brushes.White;

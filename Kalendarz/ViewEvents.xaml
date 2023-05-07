@@ -5,17 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kalendarz"
         mc:Ignorable="d"
-        Title="ViewEvents" Height="200" Width="500"
+        Title="ViewEvents" Height="600" Width="400" 
         >
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Name="label" FontSize="20" HorizontalAlignment="Center" Content="Lista wydarzeń:" Grid.Row="0"/>
+        <Label Name="label" FontSize="20" HorizontalAlignment="Center"
+               Content="Lista wydarzeń:" Grid.Row="0"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <StackPanel x:Name="events_list" Orientation="Vertical" Width="Auto">
-            </StackPanel>
+            <DataGrid x:Name="events_list" Width="Auto" Margin="5,5,5,5" 
+                      AlternatingRowBackground="LightGray" CanUserAddRows="False"
+                      AutoGenerateColumns="False" CanUserDeleteRows="False"
+                      RowDetailsVisibilityMode="VisibleWhenSelected" CanUserResizeRows="False" BorderBrush="#FF240B27"
+                      >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#FF240B27"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderThickness" Value="1,1,1,1"/>
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Wydarzenie" Binding="{Binding EventName}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Data" Binding="{Binding Date,StringFormat=d}"
+                                        Width="100"/>
+                    <DataGridTemplateColumn Header="Akcje" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Usuń" Click="Delete"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding EventDescription}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
         </ScrollViewer>
     </Grid>
 </Window>

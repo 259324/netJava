@@ -15,9 +15,11 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
             <Label Name="dayLabel" Content="0" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White"/>
-            <StackPanel x:Name="eventsPanel" Orientation="Vertical" Grid.Row="0" Grid.Column="0" Width="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                <StackPanel x:Name="eventsPanel" Orientation="Vertical" Grid.Row="0" Grid.Column="0" Width="Auto">
 
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
     </Grid>
       </Border>
 </Page>
