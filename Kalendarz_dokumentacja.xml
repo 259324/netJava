@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kalendarz</name>
+    </assembly>
+    <members>
+        <member name="T:Kalendarz.ViewEvents">
+            <summary>
+            Interaction logic for ViewEvents.xaml
+            Class shows existing events in form of lists and gives opportunity to delete 
+            </summary>
+            <summary>
+            ViewEvents
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewEvents.Delete(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function deletes event from list of events that occurs in calendar
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewEvents.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Kalendarz.WeatherData">
+            <summary>
+            Class that contains parameters of weather, with constructor
+            </summary>
+        </member>
+        <member name="T:Kalendarz.WeatherDataSource">
+            <summary>
+            Class which is use to connect by api and return weather data
+            </summary>
+        </member>
+        <member name="M:Kalendarz.WeatherDataSource.GetWeatherDataAsync(System.String)">
+            <summary>
+            Asynchronic function which connect by API with website and return info about weather
+            </summary>
+            <param name="city">The name of the city to which the temperature is returned</param>
+            <returns>Class WeatherData</returns>
+        </member>
+        <member name="T:Kalendarz.ViewedDate">
+            <summary>
+            Interaction logic for Date.xaml
+            Class visualizes and separates proper formula of calendar
+            </summary>
+            <summary>
+            ViewedDate
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewedDate.PrevYear(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function changes the year to the previous one
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewedDate.NextYear(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function changes the year to the next one
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewedDate.PrevMonth(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function changes the month to the previous one
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewedDate.NextMonth(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function changes the month to the next one
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewedDate.Reload">
+            <summary>
+            Function reloads view of calendar
+            </summary>
+        </member>
+        <member name="M:Kalendarz.ViewedDate.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Kalendarz.Event">
+            <summary>
+            Class which contains parameters to database. Database is based on Entity Framework.
+            </summary>
+        </member>
+        <member name="T:Kalendarz.EventContext">
+            <summary>
+            Context which connects database with application
+            </summary>
+        </member>
+        <member name="M:Kalendarz.EventContext.NewAddToCalendar(Kalendarz.Event)">
+            <summary>
+            Function adds new event to database
+            </summary>
+            <param name="event_">event name</param>
+        </member>
+        <member name="T:Kalendarz.CalendarDbInitializer">
+            <summary>
+            Class adds two events to database to fill up calendar 
+            </summary>
+        </member>
+        <member name="T:Kalendarz.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:Kalendarz.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:Kalendarz.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:Kalendarz.Komorka">
+            <summary>
+            Interaction logic for Komorka.xaml
+            Class presents cell of the day 
+            </summary>
+            <summary>
+            Komorka
+            </summary>
+        </member>
+        <member name="M:Kalendarz.Komorka.SetDark">
+            <summary>
+            Changes colour of cell to dark
+            </summary>
+            <param name="day">Number of day</param>
+        </member>
+        <member name="M:Kalendarz.Komorka.SetLight">
+            <summary>
+            Changes colour of cell to white
+            </summary>
+            <param name="day">Number of day</param>
+        </member>
+        <member name="M:Kalendarz.Komorka.AddEvent(Kalendarz.Event)">
+            <summary>
+            Adds new event to cell
+            </summary>
+            <param name="name">name of the event</param>
+        </member>
+        <member name="M:Kalendarz.Komorka.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Kalendarz.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            Main class which integrates all classes and functions 
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.LoadDate">
+            <summary>
+            Function loads date 
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.LoadEvents">
+            <summary>
+            Function loads event to exact cell in calendar
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.LoadCells">
+            <summary>
+            Function loads content for every cell and generate view of calendar
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.LoadWeatherData">
+            <summary>
+            Function download temperature data for Wroclaw and Warsaw city 
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.ReloadCells">
+            <summary>
+            Function reload content of cell 
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.Open_New_Event(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function regards to button that shows new event window
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.View_Events(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function regards to button that shows existing event window
+            </summary>
+        </member>
+        <member name="M:Kalendarz.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Kalendarz.NewEventWindow">
+            <summary>
+            Interaction logic for  new_event.xaml
+            </summary>
+            <summary>
+            NewEventWindow
+            </summary>
+        </member>
+        <member name="M:Kalendarz.NewEventWindow.AddEvent(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Function adds new event to database and gives opportunity to fill up informations and date about it 
+            </summary>
+        </member>
+        <member name="M:Kalendarz.NewEventWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Kalendarz.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Kalendarz.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Kalendarz.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
