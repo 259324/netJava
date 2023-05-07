@@ -78,6 +78,9 @@
     <Compile Include="Migrations\202305062009454_migNr1.designer.cs">
       <DependentUpon>202305062009454_migNr1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewEvents.xaml.cs">
+      <DependentUpon>ViewEvents.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WeatherDataSource.cs" />
     <Compile Include="ViewedDate.xaml.cs">
       <DependentUpon>ViewedDate.xaml</DependentUpon>
@@ -108,6 +111,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewEventWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewEvents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

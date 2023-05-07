@@ -38,8 +38,7 @@ namespace Kalendarz
                     //ID = 3,
                     EventName = nazwa_TB.Text,
                     EventDescription = opis_TB.Text,
-                    Date = DateTime.Now
-                    //Date = (DateTime)date_picker.SelectedDate
+                    Date = (DateTime)date_picker.SelectedDate
                 };
 
                 context.Events.Add(temp);

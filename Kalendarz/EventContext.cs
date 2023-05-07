@@ -30,11 +30,6 @@ namespace Kalendarz
         {
             this.Events.Add(event_);    
             this.SaveChanges();
-            //using (var context = new EventContext())
-            //{
-            //    context.Events.Add(event_);
-            //    context.SaveChanges();
-            //}
         }
     }
     /// <summary>

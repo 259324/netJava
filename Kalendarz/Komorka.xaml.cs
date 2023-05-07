@@ -22,9 +22,11 @@ namespace Kalendarz
     public partial class Komorka : Page
     {
 
-        private SolidColorBrush  dark = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF240B27"));
+        private SolidColorBrush dark = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF240B27"));
 
         public DateTime date;
+
+        private bool isDark = false;
         public Komorka()
         {
             InitializeComponent();
@@ -38,6 +40,7 @@ namespace Kalendarz
             dayLabel.Content = date.Day.ToString();
             Values.Background = dark;
             dayLabel.Foreground = Brushes.White;
+            isDark=true;
         }
         /// <summary>
         /// Changes colour of cell to white
@@ -48,6 +51,7 @@ namespace Kalendarz
             dayLabel.Content = date.Day.ToString();
             Values.Background = Brushes.White;
             dayLabel.Foreground = Brushes.Gray;
+            isDark=false;
         }
         /// <summary>
         /// Adds new event to cell
@@ -55,8 +59,16 @@ namespace Kalendarz
         /// <param name="name">name of the event</param>
         public void AddEvent(Event ev)
         {
-            //Label label = new Label{Content = ev.EventName};
-            Label label = new Label{ Content = "dwad"};
+            Label label = new Label{Content = ev.EventName};
+            if(isDark)
+            {
+                label.Foreground = Brushes.White;
+            }
+            else
+            {
+                label.Foreground = Brushes.Gray;
+            }
+            //Label label = new Label { Content = "dwad", Foreground=Brushes.Red};
             eventsPanel.Children.Add(label);
         }
 
@@ -64,11 +76,5 @@ namespace Kalendarz
         {
             eventsPanel.Children.Clear();
         }
-
-        public void Move(int days)
-        {
-                date=date.AddMonths(days);
-        }
     }
-
 }

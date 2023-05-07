@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +18,6 @@ namespace Kalendarz
         //Lista komorek (poszczegolnych dni wyswietlanych w miesiacu)
         public List<Komorka> komorki = new List<Komorka>();
         private readonly ViewedDate mViewedDate;
-        IList<Event> ListEvents;
 
 
 
@@ -50,7 +50,9 @@ namespace Kalendarz
 
         public void LoadEvents()
         {
-            foreach(var k in komorki)
+            IList<Event> ListEvents;
+
+            foreach (var k in komorki)
             {
                 k.ClearEvents();
             }
@@ -65,7 +67,7 @@ namespace Kalendarz
             {
                 for(int i=0;i<komorki.Count;i++)
                 {
-                    if(komorki[i].date.Date == k.Date)
+                    if(komorki[i].date.Date == k.Date.Date)
                     {
                         komorki[i].AddEvent(k);
                     }
@@ -75,9 +77,6 @@ namespace Kalendarz
 
         public void LoadCells()
         {
-            //DateTime tmp = mViewedDate.date;
-            //tmp = tmp.AddDays(mViewedDate.FirstDayOfTheMonth() - 7);
-
             //Iteracja po wierszach siatce (Grid), którą nazwałem PanelKomorek
             for (int row = 2; row < 8; row++)
             {
@@ -85,9 +84,7 @@ namespace Kalendarz
                 for (int col = 0; col < 7; col++)
                 {
                     // Tworze nowa komorke do wstawienia z parametrem int, który wyswietli w rogu komorki
-                    //Komorka komorka = new Komorka(tmp);
                     Komorka komorka = new Komorka();
-                    //tmp=tmp.AddDays(1);
                     //Tworzy frame ktorej content ustawiam na stworzona komorke (nw dlaczego ale tak trzeba)
                     Frame f = new Frame { Content = komorka };
                     //dodaje nowo powstala komorke do listy zeby zachowac wskaznik do niej
@@ -134,35 +131,19 @@ namespace Kalendarz
                     k.SetLight();
                 }
             }
-            //DateTime PrevMonth = mViewedDate.date.AddMonths(-1);
-
-            //int PrevDaysInMonth = DateTime.DaysInMonth(PrevMonth.Year, PrevMonth.Month);
-
-            //int cellCount = 0;
-            //int PrevDayCount, CurrDayCount = 1, NextDayCount=1;
-
-            ////Dodanie dni poprzedniego miesiąca
-            //PrevDayCount = PrevDaysInMonth - mViewedDate.FirstDayOfTheMonth() +2;
-            //while (PrevDayCount < PrevDaysInMonth + 1)
-            //{
-
-            //    komorki[cellCount++].SetLight(PrevDayCount++);
-            //}
-            ////Dodanie dni aktualnego miesiąca
-            //while(CurrDayCount<= mViewedDate.TotalDays)
-            //    komorki[cellCount++].SetDark(CurrDayCount++);
-
-            ////Dodanie dni następnego miesiąca
-            //while (cellCount < 42)
-            //    komorki[cellCount++].SetLight(NextDayCount++);
         }
 
         public void Open_New_Event(object sender, RoutedEventArgs e)
         {
             NewEventWindow mNewEventWindow = new NewEventWindow();
-            //newev.Show();
             mNewEventWindow.ShowDialog();
             LoadEvents();
+        }
+
+        public void View_Events(object sender, RoutedEventArgs e)
+        {
+            ViewEvents mViewEvents = new ViewEvents();
+            mViewEvents.ShowDialog();
         }
     }
 }

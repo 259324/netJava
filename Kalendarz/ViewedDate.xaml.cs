@@ -80,7 +80,7 @@ namespace Kalendarz
             monthLabel.Content = months[date.Month - 1];
             TotalDays = DateTime.DaysInMonth(date.Year, date.Month);
             Main.ReloadCells();
-            //Main.LoadEvents();
+            Main.LoadEvents();
         }
     }
 }
