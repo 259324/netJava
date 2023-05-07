@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace Kalendarz
 {
     /// <summary>
-    /// Logika interakcji dla klasy new_event.xaml
+    /// Interaction logic for  new_event.xaml
     /// </summary>
     public partial class NewEventWindow : Window
     {
@@ -27,7 +27,9 @@ namespace Kalendarz
             InitializeComponent();
             date_picker.SelectedDate = DateTime.Now;
         }
-
+        /// <summary>
+        /// Function adds new event to database and gives opportunity to fill up informations and date about it 
+        /// </summary>
         private void AddEvent(object sender, RoutedEventArgs e)
         {
             if(date_picker.SelectedDate==null)

@@ -5,7 +5,8 @@ using System.Windows;
 namespace Kalendarz
 {
     /// <summary>
-    /// Logika interakcji dla klasy ViewEvents.xaml
+    /// Interaction logic for ViewEvents.xaml
+    /// Class shows existing events in form of lists and gives opportunity to delete 
     /// </summary>
     public partial class ViewEvents : Window
     {
@@ -23,7 +24,9 @@ namespace Kalendarz
 
             events_list.ItemsSource = ListEvents;
         }
-
+        /// <summary>
+        /// Function deletes event from list of events that occurs in calendar
+        /// </summary>
         public void Delete(object sender, RoutedEventArgs e)
         {
             Event obj = ((FrameworkElement)sender).DataContext as Event;

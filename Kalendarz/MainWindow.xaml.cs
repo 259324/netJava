@@ -12,13 +12,12 @@ namespace Kalendarz
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// Main class which integrates all classes and functions 
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Lista komorek (poszczegolnych dni wyswietlanych w miesiacu)
         public List<Komorka> komorki = new List<Komorka>();
         private readonly ViewedDate mViewedDate;
-
 
 
         public MainWindow()
@@ -38,7 +37,9 @@ namespace Kalendarz
             _ = LoadWeatherData();
 
         }
-
+        /// <summary>
+        /// Function loads date 
+        /// </summary>
         public void LoadDate()
         {
             Frame f = new Frame { Content = mViewedDate };
@@ -47,7 +48,9 @@ namespace Kalendarz
             Grid.SetColumn(f, 0);
             Grid.SetColumnSpan(f, 7);
         }
-
+        /// <summary>
+        /// Function loads event to exact cell in calendar
+        /// </summary>
         public void LoadEvents()
         {
             IList<Event> ListEvents;
@@ -73,32 +76,27 @@ namespace Kalendarz
                 }
             }
         }
-
+        /// <summary>
+        /// Function loads content for every cell and generate view of calendar
+        /// </summary>
         public void LoadCells()
         {
-            //Iteracja po wierszach siatce (Grid), którą nazwałem PanelKomorek
             for (int row = 2; row < 8; row++)
             {
-                // po kolumnach
                 for (int col = 0; col < 7; col++)
                 {
-                    // Tworze nowa komorke do wstawienia z parametrem int, który wyswietli w rogu komorki
                     Komorka komorka = new Komorka();
-                    //Tworzy frame ktorej content ustawiam na stworzona komorke (nw dlaczego ale tak trzeba)
-                    Frame f = new Frame { Content = komorka };
-                    //dodaje nowo powstala komorke do listy zeby zachowac wskaznik do niej
+                    Frame f = new Frame { Content = komorka }; 
                     komorki.Add(komorka);
-
-                    //Dodanie elementu do siatki (tego Frame-a)
-                    PanelKomorek.Children.Add(f);
-                    //ustawienie w ktorym wierszu ma byc
+                    PanelKomorek.Children.Add(f);                 
                     Grid.SetRow(f, row);
-                    // i kolumnie
                     Grid.SetColumn(f, col);
                 }
             }
         }
-     
+        /// <summary>
+        /// Function download temperature data for Wroclaw and Warsaw city 
+        /// </summary>
         public async Task LoadWeatherData() 
         {
             var weatherDataWro = await WeatherDataSource.GetWeatherDataAsync("wroclaw");
@@ -106,7 +104,9 @@ namespace Kalendarz
             var weatherDataWwa = await WeatherDataSource.GetWeatherDataAsync("warszawa");
             WeatherLabelWwa.Content = String.Format("pogoda: {0} {1} C", weatherDataWwa.Stacja, weatherDataWwa.Temperatura);
         }
-
+        /// <summary>
+        /// Function reload content of cell 
+        /// </summary>
         public void ReloadCells()
         {
             DateTime tmp = new DateTime(mViewedDate.date.Year, mViewedDate.date.Month, 1);
@@ -131,14 +131,18 @@ namespace Kalendarz
                 }
             }
         }
-
+        /// <summary>
+        /// Function regards to button that shows new event window
+        /// </summary>
         public void Open_New_Event(object sender, RoutedEventArgs e)
         {
             NewEventWindow mNewEventWindow = new NewEventWindow();
             mNewEventWindow.ShowDialog();
             LoadEvents();
         }
-
+        /// <summary>
+        /// Function regards to button that shows existing event window
+        /// </summary>
         public void View_Events(object sender, RoutedEventArgs e)
         {
             ViewEvents mViewEvents = new ViewEvents();
