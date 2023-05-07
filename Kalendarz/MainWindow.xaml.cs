@@ -16,14 +16,16 @@ namespace Kalendarz
     {
         //Lista komorek (poszczegolnych dni wyswietlanych w miesiacu)
         public List<Komorka> komorki = new List<Komorka>();
-        private readonly Date date;
+        private readonly ViewedDate mViewedDate;
+        IList<Event> ListEvents;
 
-        
+
+
         public MainWindow()
         {
             InitializeComponent();
 
-            date = new Date(this);
+            mViewedDate = new ViewedDate(this);
 
             LoadDate();
 
@@ -33,46 +35,13 @@ namespace Kalendarz
 
             LoadEvents();
 
-            LoadWeatherData();
-
-            
-
-            /*
-            void NewAddtoCalendar(AddToCalendar addToCalendar)
-            {
-                using (var db = new AddToCalendarContext())
-                {
-                    db.Events.Add(addToCalendar);
-                    db.SaveChanges();
-                }
-            }
-            */
-            /*
-            var context = new AddToCalendarContext();
-            var temp = new AddToCalendar
-            {
-                ID = 1,
-                EventName = "Urodziny 3",
-                EventDescription = "5 urodziny Kasi"
-            };
-            context.NewAddToCalendar(temp);
-            
-             var temp1 = new AddToCalendar
-             {
-                 ID = 2,
-                 EventName = "Zakupy",
-                 EventDescription = "Kup marchewke"
-             };
-
-
-            komorki[5].AddEvent(ListEvents[1].EventName);
-             */
+            //_ = LoadWeatherData();
 
         }
 
         public void LoadDate()
         {
-            Frame f = new Frame { Content = date };
+            Frame f = new Frame { Content = mViewedDate };
             PanelKomorek.Children.Add(f);
             Grid.SetRow(f, 0);
             Grid.SetColumn(f, 0);
@@ -81,19 +50,34 @@ namespace Kalendarz
 
         public void LoadEvents()
         {
-            IList<Event> ListEvents;
-            using (var db = new EventContext())
+            foreach(var k in komorki)
             {
-                ListEvents = db.Events.ToList();
+                k.ClearEvents();
             }
 
-            for (int i = 0; i < ListEvents.Count; i++)
-                komorki[i].AddEvent(ListEvents[i].EventName);
+            using (var context = new EventContext())
+            {
+                ListEvents = context.Events.ToList();
+                debug.Content = context.Events.Count().ToString();
+            }
+
+            foreach (var k in ListEvents)
+            {
+                for(int i=0;i<komorki.Count;i++)
+                {
+                    if(komorki[i].date.Date == k.Date)
+                    {
+                        komorki[i].AddEvent(k);
+                    }
+                }
+            }
         }
 
         public void LoadCells()
-        { //Zlicza ilosc komorek i je numeruje
-            int count = 0;
+        {
+            //DateTime tmp = mViewedDate.date;
+            //tmp = tmp.AddDays(mViewedDate.FirstDayOfTheMonth() - 7);
+
             //Iteracja po wierszach siatce (Grid), którą nazwałem PanelKomorek
             for (int row = 2; row < 8; row++)
             {
@@ -101,7 +85,9 @@ namespace Kalendarz
                 for (int col = 0; col < 7; col++)
                 {
                     // Tworze nowa komorke do wstawienia z parametrem int, który wyswietli w rogu komorki
-                    Komorka komorka = new Komorka(count);
+                    //Komorka komorka = new Komorka(tmp);
+                    Komorka komorka = new Komorka();
+                    //tmp=tmp.AddDays(1);
                     //Tworzy frame ktorej content ustawiam na stworzona komorke (nw dlaczego ale tak trzeba)
                     Frame f = new Frame { Content = komorka };
                     //dodaje nowo powstala komorke do listy zeby zachowac wskaznik do niej
@@ -113,7 +99,6 @@ namespace Kalendarz
                     Grid.SetRow(f, row);
                     // i kolumnie
                     Grid.SetColumn(f, col);
-                    count++;
                 }
             }
         }
@@ -126,52 +111,58 @@ namespace Kalendarz
             WeatherLabelWwa.Content = String.Format("pogoda: {0} {1} C", weatherDataWwa.Stacja, weatherDataWwa.Temperatura);
         }
 
-
         public void ReloadCells()
         {
-            DateTime PrevMonth = date.ViewedDate.AddMonths(-1);
+            DateTime tmp = new DateTime(mViewedDate.date.Year, mViewedDate.date.Month, 1);
 
-            int PrevDaysInMonth = DateTime.DaysInMonth(PrevMonth.Year, PrevMonth.Month);
+            while(tmp.DayOfWeek != DayOfWeek.Monday)
+            {
+                tmp = tmp.AddDays(-1);
+            }
 
-            int cellCount = 0;
-            int PrevDayCount, CurrDayCount = 1, NextDayCount=1;
+            foreach (var k in komorki)
+            {
+                k.date = tmp;
+                tmp = tmp.AddDays(1);
 
-            //Dodanie dni poprzedniego miesiąca
-            PrevDayCount = PrevDaysInMonth - date.FirstDayOfTheMonth() +2;
-            while (PrevDayCount< PrevDaysInMonth+1)
-                komorki[cellCount++].SetLight(PrevDayCount++);
+                if(k.date.Month == mViewedDate.date.Month)
+                {
+                    k.SetDark();
+                }
+                else
+                {
+                    k.SetLight();
+                }
+            }
+            //DateTime PrevMonth = mViewedDate.date.AddMonths(-1);
 
-            //Dodanie dni aktualnego miesiąca
-            while(CurrDayCount<=date.TotalDays)
-                komorki[cellCount++].SetDark(CurrDayCount++);
+            //int PrevDaysInMonth = DateTime.DaysInMonth(PrevMonth.Year, PrevMonth.Month);
 
-            //Dodanie dni następnego miesiąca
-            while (cellCount < 42)
-                komorki[cellCount++].SetLight(NextDayCount++);
+            //int cellCount = 0;
+            //int PrevDayCount, CurrDayCount = 1, NextDayCount=1;
+
+            ////Dodanie dni poprzedniego miesiąca
+            //PrevDayCount = PrevDaysInMonth - mViewedDate.FirstDayOfTheMonth() +2;
+            //while (PrevDayCount < PrevDaysInMonth + 1)
+            //{
+
+            //    komorki[cellCount++].SetLight(PrevDayCount++);
+            //}
+            ////Dodanie dni aktualnego miesiąca
+            //while(CurrDayCount<= mViewedDate.TotalDays)
+            //    komorki[cellCount++].SetDark(CurrDayCount++);
+
+            ////Dodanie dni następnego miesiąca
+            //while (cellCount < 42)
+            //    komorki[cellCount++].SetLight(NextDayCount++);
         }
 
         public void Open_New_Event(object sender, RoutedEventArgs e)
         {
-            NewEventWindow newev = new NewEventWindow();
-            newev.Show();
-            Show11();
-
+            NewEventWindow mNewEventWindow = new NewEventWindow();
+            //newev.Show();
+            mNewEventWindow.ShowDialog();
+            LoadEvents();
         }
-
-        public void Show11()
-        {
-            IList<Event> ListEvents1;
-            using (var db = new EventContext())
-            {
-                ListEvents1 = db.Events.ToList();
-            }
-            int SizeOfList = ListEvents1.Count;
-            for (int i = 0; i < SizeOfList; i++)
-            {
-                Console.WriteLine(ListEvents1[i].EventName);
-                komorki[i].AddEvent(ListEvents1[i].EventName);
-            }
-        }
-
     }
 }

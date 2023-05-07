@@ -7,13 +7,13 @@ namespace Kalendarz.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Baza1 : IMigrationMetadata
+    public sealed partial class migNr1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Baza1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(migNr1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202304261241104_baza1"; }
+            get { return "202305062009454_migNr1"; }
         }
         
         string IMigrationMetadata.Source

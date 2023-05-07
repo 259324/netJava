@@ -17,8 +17,8 @@ namespace Kalendarz
         public EventContext()
             : base("AddToCalendar")
         {
-            Database.SetInitializer(new CalendarDbInitializer());
-
+            //Database.SetInitializer(new CalendarDbInitializer());
+            Database.SetInitializer<EventContext>(null);
         }
 
         public DbSet<Event> Events { get; set; }
@@ -28,11 +28,13 @@ namespace Kalendarz
         /// <param name="event_">event name</param>
         public void NewAddToCalendar(Event event_)
         {
-            using (var context = new EventContext())
-            {
-                context.Events.Add(event_);
-                context.SaveChanges();
-            }
+            this.Events.Add(event_);    
+            this.SaveChanges();
+            //using (var context = new EventContext())
+            //{
+            //    context.Events.Add(event_);
+            //    context.SaveChanges();
+            //}
         }
     }
     /// <summary>
@@ -43,13 +45,13 @@ namespace Kalendarz
         protected override void Seed(EventContext context)
         {
 
-            var MainEvents = new List<Event>
-                {
-                new Event() {ID = 1, EventName = "Urodziny", EventDescription = "Urodziny Asi", Date = DateTime.Now},
-                new Event() {ID = 2, EventName = "Zakupy", EventDescription = "Kup Marchewkę", Date = DateTime.Now}
-                };
-            MainEvents.ForEach(c  => context.Events.Add(c));
-            context.SaveChanges();
+            //var defaultEvents = new List<Event>
+            //    {
+            //    new Event() {ID = 1, EventName = "Urodziny", EventDescription = "Urodziny Asi", Date = DateTime.Now},
+            //    new Event() {ID = 2, EventName = "Zakupy", EventDescription = "Kup Marchewkę", Date = DateTime.Now}
+            //    };
+            //defaultEvents.ForEach(c  => context.Events.Add(c));
+            //context.SaveChanges();
         }
     }
 

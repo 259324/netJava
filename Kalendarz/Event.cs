@@ -15,7 +15,6 @@ namespace Kalendarz
         public string EventName { get; set; }
         public string EventDescription { get; set; }
         public DateTime Date { get; set; }
-        public string Data { get; set; }
     }
 
 }

@@ -20,27 +20,27 @@ namespace Kalendarz
     /// Interaction logic for Date.xaml
     /// Class visualizes and separates proper formula of calendar
     /// </summary>
-    public partial class Date : Page
+    public partial class ViewedDate : Page
     {
-        public DateTime ViewedDate { get; set; }
+        public DateTime date { get; set; }
         private readonly MainWindow Main;
         readonly string[] months = { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień" };
         public int TotalDays;
-        public Date(MainWindow main)
+        public ViewedDate(MainWindow main)
         {
             InitializeComponent();
-            ViewedDate = DateTime.Now;
-            yearLabel.Content = ViewedDate.Year;
-            monthLabel.Content = months[ViewedDate.Month - 1];
+            date = DateTime.Now;
+            yearLabel.Content = date.Year;
+            monthLabel.Content = months[date.Month - 1];
             Main = main;
-            TotalDays = DateTime.DaysInMonth(ViewedDate.Year, ViewedDate.Month);
+            TotalDays = DateTime.DaysInMonth(date.Year, date.Month);
         }
         /// <summary>
         /// Function changes the year to the previous one
         /// </summary>
         public void PrevYear(object sender, RoutedEventArgs e)
         {
-            ViewedDate = ViewedDate.AddMonths(-12);
+            date = date.AddMonths(-12);
             Reload();
 
 
@@ -50,7 +50,7 @@ namespace Kalendarz
         /// </summary>
         public void NextYear(object sender, RoutedEventArgs e)
         {
-            ViewedDate = ViewedDate.AddMonths(12);
+            date = date.AddMonths(12);
             Reload();
 
         }
@@ -59,7 +59,7 @@ namespace Kalendarz
         /// </summary>
         public void PrevMonth(object sender, RoutedEventArgs e)
         {
-            ViewedDate = ViewedDate.AddMonths(-1);
+            date = date.AddMonths(-1);
             Reload();
 
         }
@@ -68,7 +68,7 @@ namespace Kalendarz
         /// </summary>
         public void NextMonth(object sender, RoutedEventArgs e)
         {
-            ViewedDate = ViewedDate.AddMonths(1);
+            date = date.AddMonths(1);
             Reload();
         }
         /// <summary>
@@ -76,23 +76,11 @@ namespace Kalendarz
         /// </summary>
         public void Reload()
         {
-            yearLabel.Content = ViewedDate.Year;
-            monthLabel.Content = months[ViewedDate.Month - 1];
-            TotalDays = DateTime.DaysInMonth(ViewedDate.Year, ViewedDate.Month);
+            yearLabel.Content = date.Year;
+            monthLabel.Content = months[date.Month - 1];
+            TotalDays = DateTime.DaysInMonth(date.Year, date.Month);
             Main.ReloadCells();
+            //Main.LoadEvents();
         }
-        /// <summary>
-        /// Function calculate first day of the month
-        /// </summary>
-        /// <returns>day of the week</returns>
-        public int FirstDayOfTheMonth()
-        {
-            DateTime tmp = ViewedDate;
-            tmp = tmp.AddDays(-(tmp.Day-1));
-            // 1 - pon, 7 - nd
-            return ((int)tmp.DayOfWeek);
-        }
-
-
     }
 }

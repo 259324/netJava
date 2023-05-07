@@ -16,11 +16,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label x:Name="Nw" Content="Dodaj nowe wydarzenie" HorizontalAlignment="Center" Grid.Row="0"   VerticalAlignment="Center"/>
-        <DatePicker HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" />
+        <Label x:Name="label" Content="Dodaj nowe wydarzenie" HorizontalAlignment="Center" Grid.Row="0"   VerticalAlignment="Center"/>
+        <DatePicker Name="date_picker"  HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" />
         <TextBox Name="nazwa_TB" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" Text="Nazwa wydarzenia" FontWeight="UltraLight" Foreground="#FF898989"  />
         <TextBox Name="opis_TB" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" Text="Opis wydarzenia" FontWeight="UltraLight" Foreground="#FF898989"   />
-        <Button Name="Dodaj_BT" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Content="DODAJ" Click="Dodaj_BT_Click" />
+        <Button Name="Dodaj_BT" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Content="DODAJ" Click="AddEvent" />
     </Grid>
 
 </Window>

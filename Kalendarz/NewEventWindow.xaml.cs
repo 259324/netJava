@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,20 +27,26 @@ namespace Kalendarz
             InitializeComponent();
         }
 
-        private void Dodaj_BT_Click(object sender, RoutedEventArgs e)
+        private void AddEvent(object sender, RoutedEventArgs e)
         {
-            var context = new EventContext();
-            var temp = new Event
-            {
-                //ID = 1,
-                EventName = nazwa_TB.Text,
-                EventDescription = opis_TB.Text
-            };
-            context.NewAddToCalendar(temp);
-            Console.WriteLine("Test1");
-            this.Close();
-            //string TB_new_event = nazwa_TB.Text;
 
+            using (var context = new EventContext())
+            {
+                var temp = new Event
+                {
+                    ID = context.Events.Count() + 1,
+                    //ID = 3,
+                    EventName = nazwa_TB.Text,
+                    EventDescription = opis_TB.Text,
+                    Date = DateTime.Now
+                    //Date = (DateTime)date_picker.SelectedDate
+                };
+
+                context.Events.Add(temp);
+                context.SaveChanges();
+
+            }
+            this.Close();
         }
     }
 }

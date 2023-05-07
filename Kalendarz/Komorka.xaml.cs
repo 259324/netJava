@@ -21,22 +21,21 @@ namespace Kalendarz
     /// </summary>
     public partial class Komorka : Page
     {
-        private List<string> events = new List<string>();
 
         private SolidColorBrush  dark = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF240B27"));
-         
-        public Komorka(int day)
+
+        public DateTime date;
+        public Komorka()
         {
             InitializeComponent();
-            dayLabel.Content = day.ToString();
         }
         /// <summary>
         /// Changes colour of cell to dark
         /// </summary>
         /// <param name="day">Number of day</param>
-        public void SetDark(int day)
+        public void SetDark()
         {
-            dayLabel.Content = day.ToString();
+            dayLabel.Content = date.Day.ToString();
             Values.Background = dark;
             dayLabel.Foreground = Brushes.White;
         }
@@ -44,9 +43,9 @@ namespace Kalendarz
         /// Changes colour of cell to white
         /// </summary>
         /// <param name="day">Number of day</param>
-        public void SetLight(int day)
+        public void SetLight()
         {
-            dayLabel.Content = day.ToString();
+            dayLabel.Content = date.Day.ToString();
             Values.Background = Brushes.White;
             dayLabel.Foreground = Brushes.Gray;
         }
@@ -54,10 +53,21 @@ namespace Kalendarz
         /// Adds new event to cell
         /// </summary>
         /// <param name="name">name of the event</param>
-        public void AddEvent(string name)
+        public void AddEvent(Event ev)
         {
-            Label label = new Label{Content = name};
+            //Label label = new Label{Content = ev.EventName};
+            Label label = new Label{ Content = "dwad"};
             eventsPanel.Children.Add(label);
+        }
+
+        public void ClearEvents()
+        {
+            eventsPanel.Children.Clear();
+        }
+
+        public void Move(int days)
+        {
+                date=date.AddMonths(days);
         }
     }
 
